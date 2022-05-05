@@ -46,13 +46,11 @@ if __name__ == '__main__':
     initData("train.txt")
     featureMatrix = list(map(lambda domain: domain.returnData(), domainList))
     labelList = list(map(lambda domain: domain.returnLabel(), domainList))
-
     testDomains = initTest("test.txt")
     testDomainFeatures = []
     for domain in testDomains:
         domainNameLength, domainNumberCount, letterEntropy = processDomain(domain)
         testDomainFeatures.append([domainNameLength, domainNumberCount, letterEntropy])
-
     clf = RandomForestClassifier(random_state=0)
     clf.fit(featureMatrix, labelList)
     testLabels = clf.predict(testDomainFeatures)
